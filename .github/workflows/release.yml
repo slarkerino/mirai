@@ -59,9 +59,17 @@ jobs:
         uses: pat-s/always-upload-cache@v3
         with:
           path: ~/.konan
-          key: ${{ runner.os }}-gradle-${{ hashFiles('*.gradle.kts') }}
+          key: ${{ runner.os }}-konan-${{ hashFiles('*.gradle.kts') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-
+            ${{ runner.os }}-konan-
+
+      - name: Cache Gradle
+        uses: pat-s/always-upload-cache@v3
+        with:
+          path: ~/.konan
+          key: ${{ runner.os }}-gradle2-${{ hashFiles('*.gradle.kts') }} # we used 'gradle' for Konan before.
+          restore-keys: |
+            ${{ runner.os }}-gradle2-
 
       - if: ${{ env.isUnix == 'true' }}
         run: chmod -R 777 *
